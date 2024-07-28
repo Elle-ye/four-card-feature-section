@@ -1,0 +1,188 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+$red: hsl(0, 78%, 62%);
+$cyan: hsl(180, 62%, 55%);
+$orange: hsl(34, 97%, 64%);
+$blue: hsl(212, 86%, 64%);
+$very-dark-blue: hsl(234, 12%, 34%);
+$grayish-blue: hsl(229, 6%, 66%);
+$very-light-gray: hsl(0, 0%, 98%);
+$f-size-100: 15px;
+$f-size-150: 1.5em;
+$f-size-200: 0.8em;
+$f-size-250: 1.2em;
+$f-size-300: 2em;
+$f-weight-200: 200;
+$f-weight-400: 400;
+$f-weight-600: 600;
+$poppins: 'Poppins';
+
+body{
+    font-family: $poppins;
+    width: 100vw;
+    background-color: $very-light-gray;
+    font-size: $f-size-100;
+    container-type: inline-size;
+}
+
+main {
+    width: 375px;
+    padding: 90px 32px 32px 32px;
+    display: block;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+@mixin fonts ($size, $weight, $color, $family, $align){
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+    font-family: $family;
+    text-align: $align;
+}
+
+/* HEADER */
+header {
+    h1 {
+        @include fonts($f-size-150, $f-weight-200, $very-dark-blue, $poppins, center)
+    }
+    h2 {
+        @include fonts($f-size-150, $f-weight-600, $very-dark-blue, $poppins, center)
+    }
+    .p-text {
+        @include fonts($f-size-100, $f-weight-400, $grayish-blue, $poppins, center);
+        line-height: 1.5;
+        padding-top: 26px;
+        padding-bottom: 78px;
+    }
+}
+
+/* MAIN CONTENT */
+section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 26px;
+}
+
+article {
+    width: calc(375px - 64px);
+    height: 222px;
+    padding: 28px;
+    border-radius: 5px;
+    margin-bottom: 26px;
+    box-sizing: border-box;
+    box-shadow: 0 0 20px $grayish-blue;
+
+    h3 {
+        @include fonts($f-size-250, $f-weight-600, $very-dark-blue, $poppins, left);
+        line-height: 1;
+        padding-bottom: 12px
+    }
+    .s-text {
+        @include fonts($f-size-200, $f-weight-400, $grayish-blue, $poppins, left);
+        
+    }
+    img {
+        width: 57px;
+        height: 57px;
+        float: right;
+        padding-bottom: 28px;
+        padding-top: 36px;
+    }
+}
+
+#supervisor {
+    border-top: 4px solid $cyan;
+}
+
+#team-builder {
+    border-top: 4px solid $red;
+}
+
+#karma {
+    border-top: 4px solid $orange;
+}
+
+#calculator {
+    border-top: 4px solid $blue;
+    margin-bottom: 0;
+}
+
+@media (width > 40em) {
+    main{
+        width: 100%;
+        padding: 44px 44px 90px 90px;
+    }
+    header{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h1, h2 {
+            font-size: $f-size-300;
+        }
+
+        .p-text {
+            max-inline-size: 55ch;
+            text-align: center;
+            padding-top: 14px;
+            padding-bottom: 36px;
+        }
+    }
+    section {
+        display: grid;
+        grid-template-areas: 
+            "supervisor   team    calculator"
+            ".            karma   .";
+        gap: 30px;
+        justify-content: space-between;
+        
+        article {
+            width: 350px;
+            height: 250px;
+            box-sizing: border-box;
+
+            h3 {
+                padding-bottom: 20px;
+            }
+
+            img {
+                width: 64px;
+                height: 64px;
+                padding-top: 42px;
+            }
+
+            .s-text {
+                font-size: $f-size-100;
+            }
+        }
+        #supervisor{
+            grid-area: supervisor;
+            margin-top: 140px;
+        }
+        #team-builder {
+            grid-area: team;
+        }
+        #karma {
+            grid-area: karma;
+            margin-top: -140px;
+        }
+        #calculator {
+            grid-area: calculator;
+            margin-bottom: 0;
+            margin-top: 140px;
+        }
+
+    }
+    section :first-child {
+        align-self:auto;
+    }
+}
