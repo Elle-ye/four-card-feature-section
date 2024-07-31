@@ -31,9 +31,8 @@ body{
 }
 
 main {
-    width: 375px;
+    width: 100%;
     padding: 90px 32px 32px 32px;
-    display: block;
     margin: auto;
     box-sizing: border-box;
 }
@@ -48,140 +47,191 @@ main {
 
 /* HEADER */
 header {
+    animation: 1.5s linear normal forwards scale-up;
+
     h1 {
-        @include fonts($f-size-150, $f-weight-200, $very-dark-blue, $poppins, center)
+        @include fonts(1.5em, $f-weight-200, $very-dark-blue, $poppins, center)
     }
     h2 {
-        @include fonts($f-size-150, $f-weight-600, $very-dark-blue, $poppins, center)
+        @include fonts(1.5em, $f-weight-600, $very-dark-blue, $poppins, center)
     }
     .p-text {
         @include fonts($f-size-100, $f-weight-400, $grayish-blue, $poppins, center);
         line-height: 1.5;
         padding-top: 26px;
         padding-bottom: 78px;
+        max-inline-size: 55ch;
+        margin: auto;
     }
 }
+
 
 /* MAIN CONTENT */
-section {
+.container {
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
     gap: 26px;
-}
+    
 
-article {
-    width: calc(375px - 64px);
-    height: 222px;
-    padding: 28px;
-    border-radius: 5px;
-    margin-bottom: 26px;
-    box-sizing: border-box;
-    box-shadow: 0 0 20px $grayish-blue;
-
-    h3 {
-        @include fonts($f-size-250, $f-weight-600, $very-dark-blue, $poppins, left);
-        line-height: 1;
-        padding-bottom: 12px
-    }
-    .s-text {
-        @include fonts($f-size-200, $f-weight-400, $grayish-blue, $poppins, left);
-        
-    }
-    img {
-        width: 57px;
-        height: 57px;
-        float: right;
-        padding-bottom: 28px;
-        padding-top: 36px;
-    }
-}
-
-#supervisor {
-    border-top: 4px solid $cyan;
-}
-
-#team-builder {
-    border-top: 4px solid $red;
-}
-
-#karma {
-    border-top: 4px solid $orange;
-}
-
-#calculator {
-    border-top: 4px solid $blue;
-    margin-bottom: 0;
-}
-
-@media (width > 40em) {
-    main{
-        width: 100%;
-        padding: 44px 44px 90px 90px;
-    }
-    header{
+// INDIVIDUAL BOXES     
+    .box {
+        width: 311px;
+        box-sizing: border-box;
+        position: relative;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        padding: 28px;
+        border-radius: 5px;
+        box-shadow: 0 10px 20px -8px $grayish-blue;
+        animation: 1.5s linear normal forwards scale-up;
 
-        h1, h2 {
-            font-size: $f-size-300;
+        &:hover {
+            cursor: pointer;
+            background-color: darken($color: $very-light-gray, $amount: 10%)
         }
-
-        .p-text {
-            max-inline-size: 55ch;
-            text-align: center;
-            padding-top: 14px;
-            padding-bottom: 36px;
+    
+        h3 {
+            @include fonts($f-size-250, $f-weight-600, $very-dark-blue, $poppins, left);
+            line-height: 1;
+            padding-bottom: 12px
+        }
+        .s-text {
+            @include fonts(0.8em, $f-weight-400, $grayish-blue, $poppins, left);
+            
+        }
+        img {
+            width: 57px;
+            height: 57px;
+            float: right;
+            padding-top: 36px;
+            align-self: end
         }
     }
-    section {
-        display: grid;
-        grid-template-areas: 
-            "supervisor   team    calculator"
-            ".            karma   .";
-        gap: 30px;
-        justify-content: space-between;
+
+    // INNER BOX FOR TEAM BUILDER AND KARMA
+    .inner-container {
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+        width: 311px;
         
-        article {
-            width: 350px;
+    
+        #team-builder {
+            border-top: 4px solid $red;
+
+            &:hover {
+                background-color: lighten($color: $red, $amount: 25%);
+                transition: background-color 0.5s;
+            }
+        }
+    
+        #karma {
+            border-top: 4px solid $orange;
+            margin-bottom: 0;
+
+            &:hover {
+                background-color: lighten($color: $orange, $amount: 25%);
+                transition: background-color 0.5s;
+            }
+        }
+    }
+   
+    
+    #supervisor {
+        border-top: 4px solid $cyan;
+
+        &:hover {
+            background-color: lighten($color: $cyan, $amount: 25%);
+            transition: background-color 0.5s;
+        }
+    }
+    
+    #calculator {
+        border-top: 4px solid $blue;
+        margin-bottom: 0;
+
+        &:hover {
+            background-color: lighten($color: $blue, $amount: 25%);
+            transition: background-color 0.5s;
+        }
+    }
+}
+
+// KEYFRAMES
+@keyframes scale-up {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+  }
+
+// MEDIA QUERY - Screens bigger than 45em (720px)
+
+@media(width > 45em) {
+    header {
+        h1 {
+            font-size: 2.5em;
+        }
+    
+        h2 {
+            font-size: 2.5em;
+        }
+    }
+    .container {
+        flex-flow: row wrap;
+
+        .box {
+            flex-grow: 1;
             height: 250px;
-            box-sizing: border-box;
-
-            h3 {
-                padding-bottom: 20px;
-            }
-
-            img {
-                width: 64px;
-                height: 64px;
-                padding-top: 42px;
-            }
 
             .s-text {
                 font-size: $f-size-100;
             }
-        }
-        #supervisor{
-            grid-area: supervisor;
-            margin-top: 140px;
-        }
-        #team-builder {
-            grid-area: team;
-        }
-        #karma {
-            grid-area: karma;
-            margin-top: -140px;
-        }
-        #calculator {
-            grid-area: calculator;
-            margin-bottom: 0;
-            margin-top: 140px;
+            
+            img {
+                width: 64px;
+                height: 64px;
+            }
         }
 
+        .inner-container {
+            width: auto;
+            flex-direction: row;
+            order: 2;            
+            flex-grow: 1;
+
+            .inner {
+                width: 100%;
+            }
+        }
     }
-    section :first-child {
-        align-self:auto;
+}
+
+
+// MEDIA QUERY - Screens bigger than 69em (1104px)
+@media (width >= 69em) {
+
+    .container {
+        flex-direction: row;
+
+        .box {
+            max-width: 360px;
+        }
+
+        #calculator {
+            order: 2;
+        }
+    
+            .inner-container {
+                flex-direction: column;
+                max-width: 360px;
+            }
     }
+
 }

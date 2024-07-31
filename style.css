@@ -13,14 +13,16 @@ body {
 }
 
 main {
-  width: 375px;
+  width: 100%;
   padding: 90px 32px 32px 32px;
-  display: block;
   margin: auto;
   box-sizing: border-box;
 }
 
 /* HEADER */
+header {
+  animation: 1.5s linear normal forwards scale-up;
+}
 header h1 {
   font-size: 1.5em;
   font-weight: 200;
@@ -44,27 +46,34 @@ header .p-text {
   line-height: 1.5;
   padding-top: 26px;
   padding-bottom: 78px;
+  max-inline-size: 55ch;
+  margin: auto;
 }
 
 /* MAIN CONTENT */
-section {
+.container {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: column;
   gap: 26px;
 }
-
-article {
+.container .box {
   width: 311px;
-  height: 222px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   padding: 28px;
   border-radius: 5px;
-  margin-bottom: 26px;
-  box-sizing: border-box;
-  box-shadow: 0 0 20px hsl(229, 6%, 66%);
+  box-shadow: 0 10px 20px -8px hsl(229, 6%, 66%);
+  animation: 1.5s linear normal forwards scale-up;
 }
-article h3 {
+.container .box:hover {
+  cursor: pointer;
+  background-color: #e0e0e0;
+}
+.container .box h3 {
   font-size: 1.2em;
   font-weight: 600;
   color: hsl(234, 12%, 34%);
@@ -73,96 +82,110 @@ article h3 {
   line-height: 1;
   padding-bottom: 12px;
 }
-article .s-text {
+.container .box .s-text {
   font-size: 0.8em;
   font-weight: 400;
   color: hsl(229, 6%, 66%);
   font-family: "Poppins";
   text-align: left;
 }
-article img {
+.container .box img {
   width: 57px;
   height: 57px;
   float: right;
-  padding-bottom: 28px;
   padding-top: 36px;
+  align-self: end;
 }
-
-#supervisor {
-  border-top: 4px solid hsl(180, 62%, 55%);
+.container .inner-container {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  width: 311px;
 }
-
-#team-builder {
+.container .inner-container #team-builder {
   border-top: 4px solid hsl(0, 78%, 62%);
 }
-
-#karma {
-  border-top: 4px solid hsl(34, 97%, 64%);
+.container .inner-container #team-builder:hover {
+  background-color: #f8c4c4;
+  transition: background-color 0.5s;
 }
-
-#calculator {
+.container .inner-container #karma {
+  border-top: 4px solid hsl(34, 97%, 64%);
+  margin-bottom: 0;
+}
+.container .inner-container #karma:hover {
+  background-color: #fee7c8;
+  transition: background-color 0.5s;
+}
+.container #supervisor {
+  border-top: 4px solid hsl(180, 62%, 55%);
+}
+.container #supervisor:hover {
+  background-color: #acecec;
+  transition: background-color 0.5s;
+}
+.container #calculator {
   border-top: 4px solid hsl(212, 86%, 64%);
   margin-bottom: 0;
 }
+.container #calculator:hover {
+  background-color: #cbe1fb;
+  transition: background-color 0.5s;
+}
 
-@media (width > 40em) {
-  main {
-    width: 100%;
-    padding: 44px 44px 90px 90px;
+@keyframes scale-up {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
   }
-  header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
-  header h1, header h2 {
-    font-size: 2em;
+}
+@media (width > 45em) {
+  header h1 {
+    font-size: 2.5em;
   }
-  header .p-text {
-    max-inline-size: 55ch;
-    text-align: center;
-    padding-top: 14px;
-    padding-bottom: 36px;
+  header h2 {
+    font-size: 2.5em;
   }
-  section {
-    display: grid;
-    grid-template-areas: "supervisor   team    calculator" ".            karma   .";
-    gap: 30px;
-    justify-content: space-between;
+  .container {
+    flex-flow: row wrap;
   }
-  section article {
-    width: 350px;
+  .container .box {
+    flex-grow: 1;
     height: 250px;
-    box-sizing: border-box;
   }
-  section article h3 {
-    padding-bottom: 20px;
-  }
-  section article img {
-    width: 64px;
-    height: 64px;
-    padding-top: 42px;
-  }
-  section article .s-text {
+  .container .box .s-text {
     font-size: 15px;
   }
-  section #supervisor {
-    grid-area: supervisor;
-    margin-top: 140px;
+  .container .box img {
+    width: 64px;
+    height: 64px;
   }
-  section #team-builder {
-    grid-area: team;
+  .container .inner-container {
+    width: auto;
+    flex-direction: row;
+    order: 2;
+    flex-grow: 1;
   }
-  section #karma {
-    grid-area: karma;
-    margin-top: -140px;
+  .container .inner-container .inner {
+    width: 100%;
   }
-  section #calculator {
-    grid-area: calculator;
-    margin-bottom: 0;
-    margin-top: 140px;
+}
+@media (width >= 69em) {
+  .container {
+    flex-direction: row;
   }
-  section :first-child {
-    align-self: auto;
+  .container .box {
+    max-width: 360px;
+  }
+  .container #calculator {
+    order: 2;
+  }
+  .container .inner-container {
+    flex-direction: column;
+    max-width: 360px;
   }
 }
